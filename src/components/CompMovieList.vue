@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div :class="{ 'no-result': !movies.length }" class="inner">
-      <div v-if="loading" class="spinner-border text-primary"></div>
+      <CompLoader v-if="loading"></CompLoader>
       <div v-if="message" class="message">
         {{ message }}
       </div>
@@ -14,10 +14,12 @@
 
 <script>
   import CompMovieItem from './CompMovieItem.vue'
+  import CompLoader from './CompLoader.vue'
 
   export default {
     components: {
-      CompMovieItem
+      CompMovieItem, 
+      CompLoader
     }, 
     computed: {
       movies() {
