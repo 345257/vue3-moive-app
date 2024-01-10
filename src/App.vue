@@ -2,6 +2,7 @@
   <CompHeader></CompHeader>
   <RouterView></RouterView>
   <CompFooter></CompFooter>
+  <div class="dummy"></div>
 </template>
 
 <script>
@@ -17,5 +18,8 @@
 </script>
 
 <style lang="scss">
-  @import "./scss/main.scss";
+  .dummy {
+    color: $dummy;
+    display: none;
+  }
 </style>

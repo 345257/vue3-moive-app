@@ -32,7 +32,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../scss/main.scss";
   .container {
     padding-top: 40px;
   }
