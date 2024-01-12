@@ -15,7 +15,9 @@
       <CompLoader :size="3" :z-index="9" fixed></CompLoader>
     </template>
     <div v-else class="movie-details">
-      <div :style="{ backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})` }" class="poster"></div>
+      <div :style="{ backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})` }" class="poster">
+        <CompLoader v-if="imageLoading" absolute></CompLoader>
+      </div>
       <div class="specs">
         <div class="title">
           {{ theMovie.Title }}
@@ -65,6 +67,11 @@
     components: {
       CompLoader
     }, 
+    data() {
+      return {
+        imageLoading: true
+      }
+    }, 
     computed: {
       theMovie() {
         return this.$store.state.movie.theMovie
@@ -80,7 +87,15 @@
     }, 
     methods: {
       requestDiffSizeImage(url, size = 700) {
-        return url.replace('SX300', `SX${size}`)
+        if(!url || url === 'N/A') {
+          this.imageLoading = false
+          return ''
+        }
+        const src = url.replace('SX300', `SX${size}`)
+        this.$loadImage(src).then(() => {
+          this.imageLoading = false
+        })
+        return src
       }
     }
   }
@@ -137,6 +152,7 @@
       background-color: $gray-200;
       background-size: cover;
       background-position: center;
+      position: relative;
     }
     .specs {
       flex-grow: 1;

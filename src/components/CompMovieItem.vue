@@ -1,5 +1,6 @@
 <template>
   <div :style="{backgroundImage: `url(${movie.Poster})`}" class="movie">
+    <CompLoader v-if="imageLoading" :size="1.5" absolute></CompLoader>
     <div class="info">
       <div class="year">
         {{ movie.Year }}
@@ -12,11 +13,36 @@
 </template>
 
 <script>
+  import CompLoader from './CompLoader.vue'
+
   export default {
+    components: {
+      CompLoader
+    }, 
     props: {
       movie: {
         type: Object, 
         default: function() { return {}}
+      }
+    }, 
+    data() {
+      return {
+        imageLoading: true
+      }
+    }, 
+    mounted() {
+      this.init()
+    }, 
+    methods: {
+      async init() {
+        const poster = this.movie.Poster
+        if(!poster || poster === 'N/A') {
+          this.imageLoading = false
+        }
+        else {
+          await this.$loadImage(poster)
+          this.imageLoading = false
+        }
       }
     }
   }
