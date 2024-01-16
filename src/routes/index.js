@@ -2,12 +2,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from './HomePage'
 import MoviePage from './MoviePage'
 import AboutPage from './AboutPage'
+import NotFoundPage from './NotFoundPage'
 
 export default createRouter({
-  // Hash
-  // https://google.com/#/search
   history: createWebHashHistory(), 
-  // pages
+
   routes: [
     {
       path: '/', 
@@ -20,6 +19,10 @@ export default createRouter({
     {
       path: '/about', 
       component: AboutPage
+    }, 
+    {
+      path: '/:notFound(.*)', 
+      component: NotFoundPage
     }
   ]
 })
