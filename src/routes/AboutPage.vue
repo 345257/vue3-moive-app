@@ -18,6 +18,7 @@
 
 <script>
   import CompLoader from '@/components/CompLoader.vue'
+  import { mapState } from 'vuex'
 
   export default {
     components: {
@@ -29,18 +30,12 @@
       }
     }, 
     computed: {
-      image() {
-        return this.$store.state.about.image
-      }, 
-      name() {
-        return this.$store.state.about.name
-      }, 
-      email() {
-        return this.$store.state.about.email
-      }, 
-      phone() {
-        return this.$store.state.about.phone
-      }
+      ...mapState('about', [
+        'image', 
+        'name', 
+        'email', 
+        'phone'
+      ])
     }, 
     mounted() {
       this.init()

@@ -15,6 +15,7 @@
 <script>
   import CompMovieItem from './CompMovieItem.vue'
   import CompLoader from './CompLoader.vue'
+  import { mapState } from 'vuex'
 
   export default {
     components: {
@@ -22,15 +23,11 @@
       CompLoader
     }, 
     computed: {
-      movies() {
-        return this.$store.state.movie.movies
-      }, 
-      message() {
-        return this.$store.state.movie.message
-      }, 
-      loading() {
-        return this.$store.state.movie.loading
-      }
+      ...mapState('movie', [
+        'movies', 
+        'message', 
+        'loading'
+      ])
     }
   }
 </script>

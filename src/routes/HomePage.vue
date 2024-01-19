@@ -14,6 +14,9 @@
       CompHeadline, 
       CompSearch, 
       CompMovieList
+    },
+    created() {
+      this.$store.commit('movie/resetMovies')
     }
   }
 </script>
