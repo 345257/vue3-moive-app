@@ -1,2 +1,6 @@
 [build]
   functions = "functions"
+[dev]
+  command = "npm run serve"
+  targetPort = 8080
+  port = 8081
